@@ -22,7 +22,7 @@ app.post('*', (req, res) => {
     res.send(response)
   } else if (text == '1') {
     // Business logic for first level response
-    let response = `CON Choose account information you want to view
+    let response = `CON Choose account ${sessionId} information you ${text} to view
     1. Account number
     2. Account balance`
     res.send(response)
