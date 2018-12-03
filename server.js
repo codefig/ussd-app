@@ -9,16 +9,16 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('*', (req, res) => {
-  res.send('This is tutorial App on creating your first USSD app in 5 minutes or less by Ajala Abdulsamii <kgasta@gmail.com>')
+  res.send('Welcome to the Ambulance Operation divisions, how can we help you ?')
 })
 
 app.post('*', (req, res) => {
   let {sessionId, serviceCode, phoneNumber, text} = req.body
   if (text == '') {
     // This is the first request. Note how we start the response with CON
-    let response = `CON What would you want to check
-    1. My Account
-    2. My phone number`
+    let response = `CON Welcome ${phoneNumber} How can we help you today ?
+    1. I am in an emergency
+    2. I want to report an emergency `
     res.send(response)
   } else if (text == '1') {
     // Business logic for first level response
