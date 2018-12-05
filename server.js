@@ -28,7 +28,7 @@ app.post('*', (req, res) => {
      message = "CON Please kindly tell us your name . "
      name = text;
      console.log("This is the value " + text);
-     console.log("another + " + textValue);
+     console.log("another + " + text.split("*"));
   }
 
   else if(text == 2){
