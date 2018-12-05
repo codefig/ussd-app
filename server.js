@@ -64,6 +64,6 @@ io.on('connection', function(socket){
   console.log("made socket connection");
   io.emit('message', {
     message : "How are you", 
-    name : "If not for you"
+    name : "If"
   });
 })
