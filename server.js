@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   res.send('Welcome to the Emergency Operation Unit, how can we help you ?')
 })
 
-app.post('/report', (req, res) => {
+app.post('/', (req, res) => {
   let {sessionId, serviceCode, phoneNumber, text} = req.body
   let name = "";
   let address = "";
