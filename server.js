@@ -9,7 +9,7 @@ const port = process.env.PORT || 3030
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
-app.use(express.static('./static'))
+// app.use(express.static('./static'))
 app.use(bodyParser.urlencoded({extended: true}))
 
 let server = app.listen(port, () => {
@@ -25,12 +25,12 @@ io.on('connection', function(socket){
   });
 })
 
-app.get('/', (req, res) => {
-  // res.send('Welcome to the Nigerian Counter-Terrorism Unit, how can we help you ?')
-  // req.sendFile('index.html');
-  console.log("This is io: " + io)
-  res.send("Welcome home");
-})
+// app.get('/', (req, res) => {
+//   // res.send('Welcome to the Nigerian Counter-Terrorism Unit, how can we help you ?')
+//   // req.sendFile('index.html');
+//   console.log("This is io: " + io)
+//   res.send("Welcome home");
+// })
 
 app.post('/', (req, res) => {
   let {sessionId, serviceCode, phoneNumber, text} = req.body
