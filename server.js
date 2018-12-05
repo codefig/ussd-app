@@ -62,4 +62,8 @@ let server = app.listen(port, () => {
 let io = socket(server)
 io.on('connection', function(socket){
   console.log("made socket connection");
+  io.emit('message', {
+    message : "How are you", 
+    name : "If not for you"
+  });
 })
