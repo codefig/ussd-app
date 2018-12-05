@@ -14,7 +14,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/', (req, res) => {
   // res.send('Welcome to the Nigerian Counter-Terrorism Unit, how can we help you ?')
-  req.sendFile('index.html');
+  // req.sendFile('index.html');
+  res.send("Welcome home");
 })
 
 app.post('/', (req, res) => {
