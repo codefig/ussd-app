@@ -6,43 +6,46 @@ const port = process.env.PORT || 3030
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('*', (req, res) => {
-  res.send('Welcome to the Nigerian Anti-Terrorism Unit, how can we help you ?')
+  res.send('Welcome to the Ambulance Operation divisions, how can we help you ?')
 })
 
 app.post('*', (req, res) => {
-  let { sessionId, serviceCode, phoneNumber, text } = req.body
-  let name = "";
-  let address = "";
-  let details = "";
-  let textValue = text.split('*').length;
-
-  let Emergency = {
-    phoneNumber: "",
-    name: "",
-    location: "",
-    details: ""
+  let {sessionId, serviceCode, phoneNumber, text} = req.body
+  if (text == '') {
+    // This is the first request. Note how we start the response with CON
+    let response = `CON Welcome ${phoneNumber} How can we help you today ?
+    1. I am in an emergency
+    2. I want to report an emergency `
+    res.send(response)
+  } else if (text == '1') {
+    // Business logic for first level response
+    let response = `CON Choose account ${sessionId} information you ${text} to view
+    1. Account number
+    2. Account balance`
+    res.send(response)
+  } else if (text == '2') {
+    // Business logic for first level response
+    let response = `END Your phone number is ${phoneNumber}`
+    res.send(response)
+  } else if (text == '1*1') {
+    // Business logic for first level response
+    let accountNumber = 'ACC1001'
+    // This is a terminal request. Note how we start the response with END
+    let response = `END Your account number is ${accountNumber}`
+    res.send(response)
+  } else if (text == '1*2') {
+    // This is a second level response where the user selected 1 in the first instance
+    let balance = 'NGN 10,000'
+    // This is a terminal request. Note how we start the response with END
+    let response = `END Your balance is ${balance}`
+    res.send(response)
+  } 
+  else {
+    res.status(400).send('Bad request!')
   }
-
-
-  if (text === '') {
-    message = "Welcome to the Nigerian Anti-Terrorism Unit, how can we help you, Please enter your name."
-  } else if (textValue === 1) {
-    message = "CON Please enter the location"
-    Emergency.name = text;
-  } else if (textValue === 2) {
-    message = "CON Please describe the situation on ground ?"
-    Emergency.location = text.split('*')[1];
-  } else if (textValue === 3) {
-    message = "CON What's your telephone number?"
-    Emergency.details = text.split('*')[2];
-   }
-    else {
-    message = `END Thanks Our team will take up and get back soon`
-  }
-  res.send(message);
 })
 
 app.listen(port, () => {
