@@ -18,36 +18,27 @@ app.post('*', (req, res) => {
   let address = "";
   let details = "";
   let textValue = text.split('*').length;
-
-  let message = "";
-  if(text == ''){
-    message = `CON Welcome ${phoneNumber} to EOU, how can we help you today ${textValue} ?`
-    console.log("this is the vvalue : " + text);
-  }
-  else if(text == 1){
-     message = "CON Please kindly tell us your name . "
-     name = text;
-     console.log("This is the value " + text);
-     console.log("another + " + text.split("*"));
-     console.log("The body is : " + req.body.text);
-  }
-
-  else if(text == 2){
-    message = "CON Please Kindly tell us the address of the emergency "
-    console.log("This is the value " + text);
-     console.log("another + " + text.split("*"));
-     console.log("The body is : " + req.body.text);
-    address = text;
-  }
-
-  else if(text == 3){
-    message = "CON please describe briefly the situation on ground."
-    console.log("This is the value " + text);
-     console.log("another + " + text.split("*"));
-     console.log("The body is : " + req.body.text);
-    details = text;
-  }
-
+  if(text === ''){
+    message = "Welcome to the Emergency center, how can we help you"
+   }else if(textValue === 1){
+    message = "CON What do you want to eat?"
+    orderDetails.name = text;
+}else if(textValue === 2){
+    message = "CON Where do we deliver it?"
+    orderDetails.description = text.split('*')[1];
+}else if(textValue === 3){
+    message = "CON What's your telephone number?"
+    orderDetails.address = text.split('*')[2];
+}else if(textValue === 4){
+    message = `CON Would you like to place this order?
+    1. Yes
+    2. No`
+    lastData = text.split('*')[3];
+}else{
+    message = `END Thanks for your order
+    Enjoy your meal in advance`
+    orderDetails.telephone = lastData   
+}
   res.send(message);
 })
 
