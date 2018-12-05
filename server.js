@@ -9,42 +9,36 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('*', (req, res) => {
-  res.send('Welcome to the Ambulance Operation divisions, how can we help you ?')
+  res.send('Welcome to the Emergency Operation Unit, how can we help you ?')
 })
 
 app.post('*', (req, res) => {
   let {sessionId, serviceCode, phoneNumber, text} = req.body
-  if (text == '') {
-    // This is the first request. Note how we start the response with CON
-    let response = `CON Welcome ${phoneNumber} How can we help you today ?
-    1. I am in an emergency
-    2. I want to report an emergency `
-    res.send(response)
-  } else if (text == '1') {
-    // Business logic for first level response
-    let response = `CON Choose account ${sessionId} information you ${text} to view
-    1. Account number
-    2. Account balance`
-    res.send(response)
-  } else if (text == '2') {
-    // Business logic for first level response
-    let response = `END Your phone number is ${phoneNumber}`
-    res.send(response)
-  } else if (text == '1*1') {
-    // Business logic for first level response
-    let accountNumber = 'ACC1001'
-    // This is a terminal request. Note how we start the response with END
-    let response = `END Your account number is ${accountNumber}`
-    res.send(response)
-  } else if (text == '1*2') {
-    // This is a second level response where the user selected 1 in the first instance
-    let balance = 'NGN 10,000'
-    // This is a terminal request. Note how we start the response with END
-    let response = `END Your balance is ${balance}`
-    res.send(response)
-  } else {
-    res.status(400).send('Bad request!')
+  let name = "";
+  let address = "";
+  let details = "";
+  let textValue = text.split('*').length;
+
+  let message = "";
+  if(text == ''){
+    message = `Welcome ${phoneNumber} to EOU, how can we help you today ${textValue} ?`
   }
+  else if(text == 1){
+     message = "Please kindly tell us your name . "
+     name = text;
+  }
+
+  else if(text == 2){
+    message = "Please Kindly tell us the address of the emergency "
+    address = text;
+  }
+
+  else if(text == 3){
+    message = "please describe briefly the situation on ground."
+    details = text;
+  }
+
+  res.send(message);
 })
 
 app.listen(port, () => {
