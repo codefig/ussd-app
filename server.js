@@ -12,9 +12,23 @@ app.use(bodyParser.json())
 app.use(express.static('./static'))
 app.use(bodyParser.urlencoded({extended: true}))
 
+let server = app.listen(port, () => {
+  console.log(`Server running on port ${port}`)
+})
+
+let io = socket(server)
+io.on('connection', function(socket){
+  console.log("made socket connection");
+  io.emit('message', {
+    message : "How are you", 
+    name : "If"
+  });
+})
+
 app.get('/', (req, res) => {
   // res.send('Welcome to the Nigerian Counter-Terrorism Unit, how can we help you ?')
   // req.sendFile('index.html');
+  console.log("This is io: " + io)
   res.send("Welcome home");
 })
 
@@ -54,17 +68,4 @@ app.post('/', (req, res) => {
   }
 
   res.send(message);
-})
-
-let server = app.listen(port, () => {
-  console.log(`Server running on port ${port}`)
-})
-
-let io = socket(server)
-io.on('connection', function(socket){
-  console.log("made socket connection");
-  io.emit('message', {
-    message : "How are you", 
-    name : "If"
-  });
 })
