@@ -9,35 +9,39 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/', (req, res) => {
-  res.send('Welcome to the Emergency Operation Unit, how can we help you ?')
+  res.send('Welcome to the Nigerian Counter-Terrorism Unit, how can we help you ?')
 })
 
 app.post('/', (req, res) => {
   let {sessionId, serviceCode, phoneNumber, text} = req.body
   let name = "";
-  let address = "";
+  let userLocation = "";
+  let distressLocation = "";
   let details = "";
   let textValue = text.split('*').length;
   console.log(req.body);
 
   let message = "";
   if(text == ''){
-    message = `CON Welcome to EOU, how can we help you today  ?`
+    message = `CON Welcome to Nigerian Anti-Terrorism Unit, Please enter your name to continue?`
     console.log(req.body);
   }
   else if(textValue == 1){
-     message = "CON Please kindly tell us your name . "
-     name = text;
+    name = text;
+    message = "CON Please kindly tell us your location."
   }
-
   else if(textValue == 2){
-    message = "CON Please Kindly tell us the address of the emergency "
-    address = text;
+    userLocation = text.split('*')[1];
+    message = "CON Please Kindly tell us the address of the distress"
   }
 
   else if(textValue == 3){
+    distressLocation = text.split('*')[2];
     message = "CON please describe briefly the situation on ground."
-    details = text;
+  }
+  else if(textValue == 4){
+    details = text.split('*')[3];
+    message = "CON We would gladly respond to this distress soon";
   }
   else{
     message = "END Thank you for getting in touch with us . ";
