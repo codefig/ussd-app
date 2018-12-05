@@ -41,7 +41,7 @@ app.post('/', (req, res) => {
   }
   else if(textValue == 4){
     details = text.split('*')[3];
-    message = "CON We would gladly respond to this distress soon";
+    message = `CON Thanks ${name} We would gladly respond to this distress soon`;
   }
   else{
     message = "END Thank you for getting in touch with us . ";
