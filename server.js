@@ -29,16 +29,22 @@ app.post('*', (req, res) => {
      name = text;
      console.log("This is the value " + text);
      console.log("another + " + text.split("*"));
-     console.log(req.body.text);
+     console.log("The body is : " + req.body.text);
   }
 
   else if(text == 2){
     message = "CON Please Kindly tell us the address of the emergency "
+    console.log("This is the value " + text);
+     console.log("another + " + text.split("*"));
+     console.log("The body is : " + req.body.text);
     address = text;
   }
 
   else if(text == 3){
     message = "CON please describe briefly the situation on ground."
+    console.log("This is the value " + text);
+     console.log("another + " + text.split("*"));
+     console.log("The body is : " + req.body.text);
     details = text;
   }
 
