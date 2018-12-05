@@ -1,15 +1,20 @@
-const app = require('express')()
+const express = require('express')
+const app = express()
 const bodyParser = require('body-parser')
 const logger = require('morgan')
+const path  = require('path')
+const socket = require('socket.io')
 
 const port = process.env.PORT || 3030
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
+app.use(express.static('./static'))
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/', (req, res) => {
-  res.send('Welcome to the Nigerian Counter-Terrorism Unit, how can we help you ?')
+  // res.send('Welcome to the Nigerian Counter-Terrorism Unit, how can we help you ?')
+  req.sendFile('index.html');
 })
 
 app.post('/', (req, res) => {
@@ -50,6 +55,11 @@ app.post('/', (req, res) => {
   res.send(message);
 })
 
-app.listen(port, () => {
+let server = app.listen(port, () => {
   console.log(`Server running on port ${port}`)
+})
+
+let io = socket(server)
+io.on('connection', function(socket){
+  console.log("made socket connection");
 })
