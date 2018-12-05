@@ -39,6 +39,9 @@ app.post('/', (req, res) => {
     message = "CON please describe briefly the situation on ground."
     details = text;
   }
+  else{
+    message = "END Thank you for getting in touch with us . ";
+  }
 
   res.send(message);
 })
