@@ -29,6 +29,7 @@ app.post('*', (req, res) => {
      name = text;
      console.log("This is the value " + text);
      console.log("another + " + text.split("*"));
+     console.log(req.body.text);
   }
 
   else if(text == 2){
