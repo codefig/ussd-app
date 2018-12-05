@@ -22,11 +22,12 @@ app.post('*', (req, res) => {
   let message = "";
   if(text == ''){
     message = `CON Welcome ${phoneNumber} to EOU, how can we help you today ${textValue} ?`
-    console.log(textValue);
+    console.log("this is the vvalue : " + textValue);
   }
   else if(text == 1){
      message = "CON Please kindly tell us your name . "
      name = text;
+     console.log("This is the value " + textValue);
   }
 
   else if(text == 2){
