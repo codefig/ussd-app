@@ -22,6 +22,7 @@ app.post('*', (req, res) => {
   let message = "";
   if(text == ''){
     message = `CON Welcome ${phoneNumber} to EOU, how can we help you today ${textValue} ?`
+    console.log(textValue);
   }
   else if(text == 1){
      message = "CON Please kindly tell us your name . "
