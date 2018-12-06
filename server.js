@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 const path = require('path')
+const mongoose = require('mongoose');
 
 const Emergency = require('./connection/schema')
 
@@ -14,6 +15,12 @@ app.use(express.static('./static'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
+mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds147681.mlab.com:47681/playground")
+.then(function(){
+  console.log("Database connected")
+}).catch(function(err){
+  console.log("Error Connection " +err);
+})
 
 
 
@@ -30,7 +37,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './static', 'index.html'));
 })
 
-app.post('/', async function (req, res) {
+app.post('/', (req, res) => {
   let { sessionId, serviceCode, phoneNumber, text } = req.body
   let name = "";
   let userLocation = "";
@@ -84,8 +91,14 @@ app.post('/', async function (req, res) {
     distressLocation : record.distressLocation, 
     details : record.details,
   })
+
   res.send(message);
-  await emergency.save();
+  emergency.save().then(function(){
+    console.log("record saved")
+  }).catch(function(err){
+    console.log("Error : "+ err);
+  })
+  
 })
 
 let server = app.listen(port, () => {
