@@ -37,6 +37,7 @@ app.post('/', async function (req, res) {
   let distressLocation = "";
   let details = "";
   let textValue = text.split('*').length;
+
   let record = {
     name: "",
     userLocation: "",
@@ -76,10 +77,14 @@ app.post('/', async function (req, res) {
   record.userLocation=text.split('*')[1];
   record.distressLocation = text.split('*')[2];
   record.details = text.split('*')[3];
-  console.log("This is the record : " + record.name);
-  console.log("location" + record.userLocation)
-  console.log("location" + record.distressLocation)
-  console.log("location" + record.details)
+  
+  let emergency = new Emergency({
+    name : record.name, 
+    userLocation : record.userLocation, 
+    distressLocation : record.distressLocation, 
+    details : record.details,
+  })
+  await emergency.save();
   res.send(message);
 })
 
