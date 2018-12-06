@@ -80,7 +80,7 @@ app.post('/', (req, res) => {
   record.details = text.split('*')[3];
 
 
-  if (record.name != "" && record.userLocation != "" && record.distressLocation != "" && record.details != "") {
+  if (record.name != undefined && record.userLocation != undefined && record.distressLocation != undefined && record.details != undefined) {
 
     let emergency = new Emergency({
       name: record.name,
