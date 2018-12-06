@@ -37,12 +37,12 @@ app.post('/', async function (req, res) {
   let distressLocation = "";
   let details = "";
   let textValue = text.split('*').length;
-  let record = new Emergency({
+  let record = {
     name: "",
     userLocation: "",
     distressLocation: "",
     details: details
-  })
+  }
   console.log(req.body);
 
   let message = "";
@@ -71,7 +71,7 @@ app.post('/', async function (req, res) {
     message = "END Thank you for getting in touch with us . ";
   }
 
-  console.log(record);
+  console.log("This is the record : " + record);
   res.send(message);
 })
 
