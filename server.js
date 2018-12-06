@@ -84,8 +84,8 @@ app.post('/', async function (req, res) {
     distressLocation : record.distressLocation, 
     details : record.details,
   })
-  await emergency.save();
   res.send(message);
+  await emergency.save();
 })
 
 let server = app.listen(port, () => {
