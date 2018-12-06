@@ -48,12 +48,12 @@ app.post('/', (req, res) => {
     distressLocation: "",
     details: details
   }
-  console.log(req.body);
+  
 
   let message = "";
   if (text == '') {
     message = `CON Welcome to Nigerian Anti-Terrorism Unit, Please enter your name to continue?`
-    console.log(req.body);
+    
   }
   else if (textValue == 1) {
     record.name = text;
