@@ -24,8 +24,10 @@ mongoose.connect("mongodb://root:ifconfig1234@ds147681.mlab.com:47681/playground
 
 
 
-app.get('/', (req, res) => {
+app.get('/', async function(req, res){
 
+  const results = await Emergency.find();
+  console.log(results);
 
   let emergency = {
     name: "Abass Adekunle",
@@ -33,8 +35,8 @@ app.get('/', (req, res) => {
     distressLocation: "Kano ",
     details: "wlskdkflkskdkf"
   }
-
-  res.sendFile(path.join(__dirname, './static', 'index.html'));
+ res.send("Welcome to the page");
+  // res.sendFile(path.join(__dirname, './static', 'index.html'));
 })
 
 app.post('/', (req, res) => {
@@ -94,7 +96,7 @@ app.post('/', (req, res) => {
       distressLocation : record.distressLocation, 
       details : record.details,
     })
-    
+
     emergency.save().then(function(){
       console.log("record saved")
     }).catch(function(err){
