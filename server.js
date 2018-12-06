@@ -70,7 +70,12 @@ app.post('/', async function (req, res) {
   else {
     message = "END Thank you for getting in touch with us . ";
   }
-
+ 
+  //set the record details 
+  record.name = text.split('*')[0];
+  record.userLocation=text.split('*')[1];
+  record.distressLocation = text.split('*')[2];
+  record.details = text.split('*')[3];
   console.log("This is the record : " + record.name);
   console.log("location" + record.userLocation)
   console.log("location" + record.distressLocation)
