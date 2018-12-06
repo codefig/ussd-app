@@ -26,9 +26,8 @@ mongoose.connect("mongodb://"+ username +":" + password +"@ds147681.mlab.com:476
   })
 
 
-
 app.get('/getall', async function (req, res) {
-
+  //this is where the index page fetches from 
   const results = await Emergency.find().select('-_id');
   console.log(results);
   res.send(results);
