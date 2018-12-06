@@ -15,7 +15,7 @@ app.use(express.static('./static'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
-mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds147681.mlab.com:47681/playground")
+mongoose.connect("mongodb://root:ifconfig1234@ds147681.mlab.com:47681/playground")
 .then(function(){
   console.log("Database connected")
 }).catch(function(err){
