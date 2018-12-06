@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './static', 'index.html'));
 })
 
-app.post('/', (req, res) => {
+app.post('/', async function (req, res){
   let {sessionId, serviceCode, phoneNumber, text} = req.body
   let name = "";
   let userLocation = "";
@@ -65,6 +65,13 @@ app.post('/', (req, res) => {
     message = "END Thank you for getting in touch with us . ";
   }
   
+  let record = new Emergency({
+    name : name, 
+    userLocation : userLocation, 
+    distressLocation : distressLocation, 
+    details : details
+  })
+  console.log(record);
   res.send(message);
 })
 
