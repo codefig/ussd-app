@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 const path  = require('path')
-const socket = require('socket.io')
+
 const Emergency = require('./connection/schema')
 
 const port = process.env.PORT || 3030
@@ -15,27 +15,18 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 
-let server = app.listen(port, () => {
-  console.log(`Server running on port ${port}`)
-})
 
-let io = socket(server)
-io.on('connection', function(socket){
-  console.log("made socket connection");
-  console.log("application : ")
-})
 
 app.get('/', (req, res) => {
-  console.log("what the fuck is : " + io);
-
+  
+  
   let emergency = {
     name : "Abass Adekunle", 
     userLocation : "Sambog kdkd", 
     distressLocation : "Kano ", 
     details : "wlskdkflkskdkf"
   }
-  console.log("this is : " + io);
-  // io.emit('message', emergency)
+
   res.sendFile(path.join(__dirname, './static', 'index.html'));
 })
 
@@ -47,7 +38,7 @@ app.post('/', (req, res) => {
   let details = "";
   let textValue = text.split('*').length;
   console.log(req.body);
-
+  
   let message = "";
   if(text == ''){
     message = `CON Welcome to Nigerian Anti-Terrorism Unit, Please enter your name to continue?`
@@ -61,7 +52,7 @@ app.post('/', (req, res) => {
     userLocation = text.split('*')[1];
     message = "CON Please Kindly tell us the address of the distress"
   }
-
+  
   else if(textValue == 3){
     distressLocation = text.split('*')[2];
     message = "CON please describe briefly the situation on ground."
@@ -73,7 +64,10 @@ app.post('/', (req, res) => {
   else{
     message = "END Thank you for getting in touch with us . ";
   }
-
+  
   res.send(message);
 })
 
+let server = app.listen(port, () => {
+  console.log(`Server running on port ${port}`)
+})
