@@ -92,12 +92,12 @@ app.post('/', (req, res) => {
     details : record.details,
   })
 
-  res.send(message);
   emergency.save().then(function(){
     console.log("record saved")
   }).catch(function(err){
     console.log("Error : "+ err);
   })
+  res.send(message);
   
 })
 
