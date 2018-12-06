@@ -85,15 +85,16 @@ app.post('/', (req, res) => {
   record.distressLocation = text.split('*')[2];
   record.details = text.split('*')[3];
   
-  let emergency = new Emergency({
-    name : record.name, 
-    userLocation : record.userLocation, 
-    distressLocation : record.distressLocation, 
-    details : record.details,
-  })
-
+  
   if(record.name != "" && record.userLocation  != "" && record.distressLocation != "" && record.details != ""){
-
+    
+    let emergency = new Emergency({
+      name : record.name, 
+      userLocation : record.userLocation, 
+      distressLocation : record.distressLocation, 
+      details : record.details,
+    })
+    
     emergency.save().then(function(){
       console.log("record saved")
     }).catch(function(err){
