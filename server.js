@@ -71,7 +71,10 @@ app.post('/', async function (req, res) {
     message = "END Thank you for getting in touch with us . ";
   }
 
-  console.log("This is the record : " + record);
+  console.log("This is the record : " + record.name);
+  console.log("location" + record.userLocation)
+  console.log("location" + record.distressLocation)
+  console.log("location" + record.details)
   res.send(message);
 })
 
