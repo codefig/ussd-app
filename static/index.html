@@ -15,8 +15,6 @@
 
     <!-- Custom styles for this template -->
     <link href="css/3-col-portfolio.css" rel="stylesheet">
-    <script type="text/JavaScript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-
   </head>
 
   <body>
@@ -59,7 +57,7 @@
 
       <div class="row" id="row">
 
-        <div class="col-lg-4 col-sm-6 portfolio-item">
+        <!-- <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
@@ -69,7 +67,8 @@
               <p>detials</p>
             </div>
           </div>
-        </div>
+        </div> -->
+
       
       </div>
       <!-- /.row -->
@@ -113,6 +112,38 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script> 
+      $('document').ready(function(){
+        console.log("Welcome to the base page");
+
+        var output = $('#row');
+        $.get('/getall', function(result){
+          console.log(result);
+
+          //traverse the array;
+          var records = "";
+          for(i=0; i<result.length; i++){
+            if(result[i].name !== undefined && result[i].userLocation !== undefined && result[i].distressLocation !== undefined && result[i].details !== undefined){
+              records +=  `
+              <div class="col-lg-4 col-sm-6 portfolio-item">
+               <div class="card h-100">
+               <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+               <div class="card-body">
+                 <p><span class="badge badge-info">Reporter</span>  `+result[i].name+`</p> 
+                 <p class="card-text"><span class="badge badge-danger">Address</span>  `+result[i].userLocation+`</p>
+                 <p><span class="badge badge-dark">Location</span>  `+result[i].distressLocation+`</p>
+                 <p>  `+result[i].details+`</p>
+               </div>
+               </div>
+               </div>`
+
+            }
+          }
+
+          output.append(records);
+        })
+      })
+    </script>
   </body>
 
 </html>

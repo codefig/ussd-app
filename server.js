@@ -16,27 +16,19 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 mongoose.connect("mongodb://root:ifconfig1234@ds147681.mlab.com:47681/playground")
-.then(function(){
-  console.log("Database connected")
-}).catch(function(err){
-  console.log("Error Connection " +err);
-})
+  .then(function () {
+    console.log("Database connected")
+  }).catch(function (err) {
+    console.log("Error Connection " + err);
+  })
 
 
 
-app.get('/', async function(req, res){
+app.get('/getall', async function (req, res) {
 
-  const results = await Emergency.find();
+  const results = await Emergency.find().select('-_id');
   console.log(results);
-
-  let emergency = {
-    name: "Abass Adekunle",
-    userLocation: "Sambog kdkd",
-    distressLocation: "Kano ",
-    details: "wlskdkflkskdkf"
-  }
- res.send("Welcome to the page");
-  // res.sendFile(path.join(__dirname, './static', 'index.html'));
+  res.send(results);
 })
 
 app.post('/', (req, res) => {
@@ -80,32 +72,32 @@ app.post('/', (req, res) => {
   else {
     message = "END Thank you for getting in touch with us . ";
   }
- 
+
   //set the record details 
   record.name = text.split('*')[0];
-  record.userLocation=text.split('*')[1];
+  record.userLocation = text.split('*')[1];
   record.distressLocation = text.split('*')[2];
   record.details = text.split('*')[3];
-  
-  
-  if(record.name != "" && record.userLocation  != "" && record.distressLocation != "" && record.details != ""){
-    
+
+
+  if (record.name != "" && record.userLocation != "" && record.distressLocation != "" && record.details != "") {
+
     let emergency = new Emergency({
-      name : record.name, 
-      userLocation : record.userLocation, 
-      distressLocation : record.distressLocation, 
-      details : record.details,
+      name: record.name,
+      userLocation: record.userLocation,
+      distressLocation: record.distressLocation,
+      details: record.details,
     })
 
-    emergency.save().then(function(){
+    emergency.save().then(function () {
       console.log("record saved")
-    }).catch(function(err){
-      console.log("Error : "+ err);
+    }).catch(function (err) {
+      console.log("Error : " + err);
     })
   }
 
   res.send(message);
-  
+
 })
 
 let server = app.listen(port, () => {
