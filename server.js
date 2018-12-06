@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const logger = require('morgan')
 const path  = require('path')
 const socket = require('socket.io')
+const Emergency = require('./connection/schema')
 
 const port = process.env.PORT || 3030
 
