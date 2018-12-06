@@ -9,8 +9,10 @@ const port = process.env.PORT || 3030
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
-// app.use(express.static('./static'))
+app.use(express.static('./static'))
 app.use(bodyParser.urlencoded({extended: true}))
+
+
 
 let server = app.listen(port, () => {
   console.log(`Server running on port ${port}`)
@@ -19,17 +21,21 @@ let server = app.listen(port, () => {
 let io = socket(server)
 io.on('connection', function(socket){
   console.log("made socket connection");
-  io.emit('message', {
-    message : "How are you", 
-    name : "If"
-  });
+  console.log("application : ")
 })
 
 app.get('/', (req, res) => {
-  // res.send('Welcome to the Nigerian Counter-Terrorism Unit, how can we help you ?')
-  // req.sendFile('index.html');
-  console.log("This is io: " + io)
-  res.send("Welcome home");
+  console.log("what the fuck is : " + io);
+
+  let emergency = {
+    name : "Abass Adekunle", 
+    userLocation : "Sambog kdkd", 
+    distressLocation : "Kano ", 
+    details : "wlskdkflkskdkf"
+  }
+  console.log("this is : " + io);
+  // io.emit('message', emergency)
+  res.sendFile(path.join(__dirname, './static', 'index.html'));
 })
 
 app.post('/', (req, res) => {
@@ -69,3 +75,4 @@ app.post('/', (req, res) => {
 
   res.send(message);
 })
+
