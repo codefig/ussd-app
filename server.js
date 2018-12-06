@@ -14,8 +14,11 @@ app.use(bodyParser.json())
 app.use(express.static('./static'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
+let username = process.env.USERNAME;
+let password = process.env.PASSWORD;
 
-mongoose.connect("mongodb://root:ifconfig1234@ds147681.mlab.com:47681/playground")
+console.log("this is username : " + username + password);
+mongoose.connect("mongodb://"+ username +":" + password +"@ds147681.mlab.com:47681/playground")
   .then(function () {
     console.log("Database connected")
   }).catch(function (err) {
