@@ -51,7 +51,7 @@ app.post('/', (req, res) => {
 
   let message = "";
   if (text == '') {
-    message = `CON Welcome to Nigerian Anti-Terrorism Unit, Please enter your name to continue?`
+    message = `CON Welcome to Traffic-Not, Fighting Human Traffic for all?`
     
   }
   else if (textValue == 1) {
@@ -65,7 +65,7 @@ app.post('/', (req, res) => {
 
   else if (textValue == 3) {
     record.distressLocation = text.split('*')[2];
-    message = "CON please describe briefly the situation on ground."
+    message = "CON please give us contacts on your guardian."
   }
   else if (textValue == 4) {
     record.details = text.split('*')[3];

@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000
 
 app.get('/', function(req, res, next){
     console.log("The index function");
-    res.send("Welcome to the homepage");
+    res.send("Welcome to Traffic-Not");
 })
 
 
